@@ -10,7 +10,7 @@ class TestSingleExtensionFileNamesFilterer(unittest.TestCase):
 
     # setUp
     def setUp(self) -> None:
-        self.subject: SingleExtensionFileNamesFilterer = SingleExtensionFileNamesFilterer()
+        self.subject: SingleExtensionFilenamesFilterer = SingleExtensionFilenamesFilterer()
 
     @parameterized.expand([
         ("test_list_1_extension_1", list(), "pdf"),
