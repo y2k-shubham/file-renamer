@@ -8,11 +8,21 @@ class FileRenamer:
         entries: List[str] = os.listdir(path)
         # Filter out directories and keep only files
         filenames: List[str] = [entry for entry in entries if os.path.isfile(os.path.join(path, entry))]
+        # os.path.join() creates file paths
+        # os.path.isfile() return only directory files not directories
         return filenames
 
     def filter_files(self, filenames: List[str], extension: str) -> List[str]:
         filtered_files: List[str] = list(filter(lambda filename: filename.endswith(extension), filenames))
         return filtered_files
+        # return [filename for filename in filenames if filename.endswith(extension)]
+
+    # def filter_files(self, filenames: List[str], extension: str) -> List[str]:
+    #       filtered_files: List[str] = []
+    #         for filename in filenames:
+    #             if filename.endswith(extension):
+    #                 filtered_files.append(filename)
+    #         return filtered_files
 
     def _replace_extension(
             self,
