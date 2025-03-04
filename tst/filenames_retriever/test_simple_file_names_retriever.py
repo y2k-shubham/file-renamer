@@ -3,13 +3,14 @@ from src.professional_file_renamer.filenames_retriever.simple_filenames_retrieve
 from parameterized import parameterized
 from typing import Any, List
 
-
+# Class Setup:
 class TestSimpleFileNamesRetriever(TestCase):
     subject: SimpleFilenamesRetriever
 
     def setUp(self) -> None:
         self.subject: SimpleFilenamesRetriever = SimpleFilenamesRetriever()
 
+# Bad Input Tests:
     @parameterized.expand([
         ("test_none", None),
         ("test_empty_string", ""),
@@ -30,6 +31,7 @@ class TestSimpleFileNamesRetriever(TestCase):
             self.subject.get_filenames(path=path)
         self.assertEqual(str(e.exception), f"Invalid path='{path}'")
 
+# Success Tests:
     @parameterized.expand([
         ("project_root_dir", "..", ["requirements.txt", ".python-version", ".gitignore", "README.md"]),
         ("test_empty_string", "../src/childish_file_renamer", ["__init__.py", "childish_file_renamer.py"])
