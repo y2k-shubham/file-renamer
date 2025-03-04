@@ -1,8 +1,10 @@
+# Imports:
+from typing import List # For type hints
+from abc import ABC, abstractmethod # For creating abstract class
 
-from typing import List
-from abc import ABC, abstractmethod
-
+# Abstract Class Definition:
 class FilenamesFilterer(ABC):
+# Abstract Method:
     @abstractmethod
     def filter_filenames(self, filenames: List[str], extension: str) -> List[str]:
         pass
