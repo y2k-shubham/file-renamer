@@ -2,7 +2,7 @@ from src.professional_file_renamer.new_filename_creator.filename_creator import 
 from typing import override
 from typing import List
 
-class ExtensionFilenameCreator(FilenameCreator):
+class ExtensionFilenameCreator(Test):
     @override
     def get_new_filename(
             self,

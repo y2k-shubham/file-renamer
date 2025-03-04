@@ -1,13 +1,12 @@
-import unittest
-
+from unittest import TestCase
 from parameterized import parameterized
-
 from src.professional_file_renamer.new_filename_creator.extension_filename_creator import ExtensionFilenameCreator
 
-
-class MyTestCase(unittest.TestCase):
+# Class Definition:
+class TestExtensionFilenameCreator(TestCase):
     subject: ExtensionFilenameCreator
 
+    # def setUp(self):
     def setUp(self):
         self.subject: ExtensionFilenameCreator = ExtensionFilenameCreator()
 
