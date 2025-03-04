@@ -1,3 +1,4 @@
+# Imports and Class Definition:
 import os
 from typing import List, override
 from src.professional_file_renamer.filenames_retriever.filenames_retriever import FilenamesRetriever
@@ -15,6 +16,7 @@ class SimpleFilenamesRetriever(FilenamesRetriever):
             # filenames: List[str] = list(filter(lambda entry: os.path.isfile(os.path.join(path, entry)), entries))
             filenames: List[str] = [entry for entry in entries if os.path.isfile(os.path.join(path, entry))]
             return filenames
+        # Error Handling:
         except FileNotFoundError as e:
             print(f"Directory '{path}' not found.")
             return []
