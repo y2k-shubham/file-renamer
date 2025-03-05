@@ -41,8 +41,8 @@ class TestSimpleRenameApplier(TestCase):
         self.assertTrue(os.path.exists(os.path.join(self.TEST_DIR_NAME, self.TEST_FILE_NAME)))
 
     @parameterized.expand([
-        ("test_case_1", "invalid_directory", "TEST_FILE_NAME", "file1.txt"),
-        # ("test_case_2", "directory", " ", "file2.png"),
+        ("test_case_1", "invalid_directory", TEST_FILE_NAME, "file1.txt"),
+        ("test_case_2", TEST_DIR_NAME, "file1.puchi", "file2.png"),
     ])
     def test_rename_file_source_file_does_not_exist(
             self,
@@ -55,3 +55,5 @@ class TestSimpleRenameApplier(TestCase):
             self.subject.rename(path=path, source_filename=source_filename,destination_filename=dest_filename)
         source_filepath: str = os.path.join(path, source_filename)
         self.assertEqual(str(e.exception), f"Source file does not exist: '{source_filepath}'")
+
+        self._validate_no_change_in_file()
