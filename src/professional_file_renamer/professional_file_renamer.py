@@ -38,8 +38,8 @@ class ProfessionalFileRenamer:
         filenames: List[str] = self._filenames_retriever.get_filenames(path=path)
         filtered_filenames: List[str] = self._filenames_filterer.filter_filenames(filenames=filenames, extension=from_extension)
         for filename in filtered_filenames:
-            new_filename: str = self._filename_creator.get_new_filename(source_filename=filename, suffix=to_extension)
-            self._rename_applier.rename(path=path, source_filename=filename, destination_filename=new_filename)
+            new_filename: str = self._filename_creator.get_new_filename(source_filename=filename, suffix=to_extension) # Create new filename
+            self._rename_applier.rename(path=path, source_filename=filename, destination_filename=new_filename)  # Perform rename
 
 if __name__ == '__main__':
     filenames_retriever: FilenamesRetriever = SimpleFilenamesRetriever()

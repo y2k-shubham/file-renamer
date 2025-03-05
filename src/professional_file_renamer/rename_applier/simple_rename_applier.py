@@ -1,5 +1,4 @@
 from src.professional_file_renamer.rename_applier.rename_applier import RenameApplier
-
 import os
 
 
