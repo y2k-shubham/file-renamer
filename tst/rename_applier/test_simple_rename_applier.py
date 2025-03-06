@@ -1,4 +1,4 @@
-import os
+
 import shutil
 from parameterized import parameterized
 from unittest import TestCase
