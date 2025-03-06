@@ -44,10 +44,6 @@ class TestSimpleRenameApplier(TestCase):
         self.subject.rename(path, source_filename, dest_filename)
         self._validate_no_change_in_file()
 
-    def _validate_no_change_in_file(self) -> None:
-        for test_file_name in TestSimpleRenameApplier.TEST_FILE_NAMES:
-            self.assertTrue(os.path.exists(os.path.join(self.TEST_DIR_NAME, test_file_name)))
-
     @parameterized.expand([
         ("test_case_1", "invalid_directory", TEST_FILE_NAME_1, "file1.txt"),
         ("test_case_2", TEST_DIR_NAME, "file1.puchi", "file2.png"),
@@ -66,7 +62,6 @@ class TestSimpleRenameApplier(TestCase):
 
         self._validate_no_change_in_file()
 
-
     @parameterized.expand([
         ("test_case_1", TEST_DIR_NAME, TEST_FILE_NAME_2, TEST_FILE_NAME_1),
         ("test_case_2", TEST_DIR_NAME, TEST_FILE_NAME_1, TEST_FILE_NAME_2),
@@ -84,3 +79,26 @@ class TestSimpleRenameApplier(TestCase):
         self.assertEqual(str(e.exception), f"Destination file already exists: '{dest_filepath}'")
 
         self._validate_no_change_in_file()
+
+    @parameterized.expand([
+        ("test_case_1", TEST_DIR_NAME, TEST_FILE_NAME_1, "new_file_name_1.md", [TEST_FILE_NAME_2]),
+        ("test_case_2", TEST_DIR_NAME, TEST_FILE_NAME_2, "new_file_name_2.xml", [TEST_FILE_NAME_1]),
+    ])
+    def test_rename_file_happy_case(
+            self,
+            scenario_name: str,
+            path: str,
+            source_filename: str,
+            dest_filename: str,
+            unchanged_filenames: List[str]) -> None:
+        self.subject.rename(path=path, source_filename=source_filename, destination_filename=dest_filename)
+        new_filenames: List[str] = [dest_filename] + unchanged_filenames
+        self._validate_files_exist(filenames=new_filenames)
+
+    def _validate_no_change_in_file(self) -> None:
+        for test_file_name in TestSimpleRenameApplier.TEST_FILE_NAMES:
+            self.assertTrue(os.path.exists(os.path.join(self.TEST_DIR_NAME, test_file_name)))
+
+    def _validate_files_exist(self, filenames: List[str]) -> None:
+        for filename in filenames:
+            self.assertTrue(os.path.isfile(os.path.join(TestSimpleRenameApplier.TEST_DIR_NAME, filename)))
