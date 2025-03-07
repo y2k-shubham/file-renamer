@@ -1,3 +1,5 @@
+import os
+
 from src.professional_file_renamer.filenames_retriever.filenames_retriever import FilenamesRetriever
 from src.professional_file_renamer.filenames_retriever.simple_filenames_retriever import SimpleFilenamesRetriever
 from src.professional_file_renamer.filenames_filterer.filenames_filterer import FilenamesFilterer
@@ -42,6 +44,7 @@ class ProfessionalFileRenamer:
             self._rename_applier.rename(path=path, source_filename=filename, destination_filename=new_filename)  # Perform rename
 
 if __name__ == '__main__':
+    print(f"Current directory is {os.path.abspath(os.curdir)}")
     filenames_retriever: FilenamesRetriever = SimpleFilenamesRetriever()
     filenames_filterer: FilenamesFilterer = MultiExtensionFilenamesFilterer()
     filename_creator: FilenameCreator = ExtensionFilenameCreator()
