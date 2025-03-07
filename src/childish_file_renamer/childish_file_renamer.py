@@ -67,6 +67,10 @@ class FileRenamer:
 if __name__ == '__main__':
     renamer: FileRenamer = FileRenamer()
     renamer.rename_files_in_directory(
-        path="/Users/ykshubhm/Downloads/playground/attempt_1",
-        old_extension='txt',
-        new_extension='md')
+        # path="/Users/ykshubhm/Downloads/playground/attempt_1",
+        path = "../../playground",
+        # old_extension='txt',
+        # new_extension='md')
+        old_extension='json',
+        new_extension='jpeg')
+
