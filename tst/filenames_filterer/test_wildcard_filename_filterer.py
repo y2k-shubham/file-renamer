@@ -15,7 +15,7 @@ class TestFilenamesFilterer(unittest.TestCase):
     @parameterized.expand([
         ("wildcard_txt_files", ["test.txt", "doc.txt", "image.png"], "*.txt", ["test.txt", "doc.txt"]),
         ("single_char_pattern", ["a.txt", "ab.txt", "abc.txt"], "?.txt", ["a.txt"]),
-        ("Complex_pattern", ["a.txt", "ab.txt", "abc.txt"], "?.txt", ["a.txt"]),
+        ("Complex_pattern", ["a.txt", "ab.txt", "abc.txt"], "??.txt", ["ab.txt"]),
         ("empty_input", [], "*.txt", []),
         ("character_set", ["file1.txt", "fileA.txt", "file_.txt"],"file[0-9].txt",["file1.txt"])
     ])
