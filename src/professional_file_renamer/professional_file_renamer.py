@@ -3,8 +3,8 @@ import os
 from src.professional_file_renamer.filenames_retriever.filenames_retriever import FilenamesRetriever
 from src.professional_file_renamer.filenames_retriever.simple_filenames_retriever import SimpleFilenamesRetriever
 from src.professional_file_renamer.filenames_filterer.filenames_filterer import FilenamesFilterer
-from src.professional_file_renamer.filenames_filterer.single_extension_filenames_filterer import SingleExtensionFilenamesFilterer
-from src.professional_file_renamer.filenames_filterer.multi_extension_filenames_filterer import MultiExtensionFilenamesFilterer
+# from src.professional_file_renamer.filenames_filterer.single_extension_filenames_filterer import SingleExtensionFilenamesFilterer
+from src.professional_file_renamer.filenames_filterer.wildcard_filename_filterer import WildcardFilenameFilterer
 from src.professional_file_renamer.new_filename_creator.filename_creator import FilenameCreator
 from src.professional_file_renamer.new_filename_creator.extension_filename_creator import ExtensionFilenameCreator
 from src.professional_file_renamer.rename_applier.rename_applier import RenameApplier
@@ -46,7 +46,7 @@ class ProfessionalFileRenamer:
 if __name__ == '__main__':
     print(f"Current directory is {os.path.abspath(os.curdir)}")
     filenames_retriever: FilenamesRetriever = SimpleFilenamesRetriever()
-    filenames_filterer: FilenamesFilterer = MultiExtensionFilenamesFilterer()
+    filenames_filterer: FilenamesFilterer = WildcardFilenameFilterer()
     filename_creator: FilenameCreator = ExtensionFilenameCreator()
     rename_applier: RenameApplier = SimpleRenameApplier()
 
