@@ -1,8 +1,11 @@
+import logging
+import os
+
 from src.professional_file_renamer.filenames_retriever.filenames_retriever import FilenamesRetriever
 from src.professional_file_renamer.filenames_retriever.simple_filenames_retriever import SimpleFilenamesRetriever
 from src.professional_file_renamer.filenames_filterer.filenames_filterer import FilenamesFilterer
-from src.professional_file_renamer.filenames_filterer.single_extension_filenames_filterer import SingleExtensionFilenamesFilterer
-from src.professional_file_renamer.filenames_filterer.multi_extension_filenames_filterer import MultiExtensionFilenamesFilterer
+# from src.professional_file_renamer.filenames_filterer.single_extension_filenames_filterer import SingleExtensionFilenamesFilterer
+from src.professional_file_renamer.filenames_filterer.wildcard_filename_filterer import WildcardFilenameFilterer
 from src.professional_file_renamer.new_filename_creator.filename_creator import FilenameCreator
 from src.professional_file_renamer.new_filename_creator.extension_filename_creator import ExtensionFilenameCreator
 from src.professional_file_renamer.rename_applier.rename_applier import RenameApplier
@@ -38,12 +41,23 @@ class ProfessionalFileRenamer:
         filenames: List[str] = self._filenames_retriever.get_filenames(path=path)
         filtered_filenames: List[str] = self._filenames_filterer.filter_filenames(filenames=filenames, extension=from_extension)
         for filename in filtered_filenames:
-            new_filename: str = self._filename_creator.get_new_filename(source_filename=filename, suffix=to_extension)
-            self._rename_applier.rename(path=path, source_filename=filename, destination_filename=new_filename)
+            new_filename: str = self._filename_creator.get_new_filename(source_filename=filename, suffix=to_extension) # Create new filename
+            self._rename(path=path, source_filename=filename, destination_filename=new_filename) # rename file
+
+
+    def _rename(self, path: str, source_filename: str, destination_filename: str) -> None:
+        try:
+            self._rename_applier.rename(
+                path=path, source_filename=source_filename, destination_filename=destination_filename)
+        except FileNotFoundError as e:
+           logging.warning(f"File not found: {e}")
+        except FileExistsError as e:
+           logging.warning(f"File already exists: {e}")
 
 if __name__ == '__main__':
+    print(f"Current directory is {os.path.abspath(os.curdir)}")
     filenames_retriever: FilenamesRetriever = SimpleFilenamesRetriever()
-    filenames_filterer: FilenamesFilterer = MultiExtensionFilenamesFilterer()
+    filenames_filterer: FilenamesFilterer = WildcardFilenameFilterer()
     filename_creator: FilenameCreator = ExtensionFilenameCreator()
     rename_applier: RenameApplier = SimpleRenameApplier()
 

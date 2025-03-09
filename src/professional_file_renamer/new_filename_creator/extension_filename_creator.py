@@ -13,6 +13,7 @@ class ExtensionFilenameCreator(FilenameCreator):
         if (not isinstance(suffix, str)) or (not suffix):
             raise ValueError(f"Invalid suffix='{suffix}'")
 
+        # Splits filename at each dot(.)
         filename_tokens: List[str] = source_filename.split('.')
         filename_tokens_without_extension: List[str] = filename_tokens[:-1]
         filename_without_extension: str = ".".join(filename_tokens_without_extension)
