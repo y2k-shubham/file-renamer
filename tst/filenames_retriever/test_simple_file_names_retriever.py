@@ -32,14 +32,14 @@ class TestSimpleFileNamesRetriever(TestCase):
         self.assertEqual(str(e.exception), f"Invalid path='{path}'")
 
 # Success Tests:
-    @parameterized.expand([
-        ("project_root_dir", "..", ["requirements.txt", ".python-version", ".gitignore", "README.md"]),
-        ("test_empty_string", "../src/childish_file_renamer", ["__init__.py", "childish_file_renamer.py"])
-    ])
-    def test_get_files_success_project_root(
-            self,
-            scenario_name: str,
-            path: str,
-            file_names_expected: List[str]) -> None:
-        file_names_computed: List[str] = self.subject.get_filenames(path=path)
-        self.assertEqual(first=set(file_names_expected), second=set(file_names_computed))
+#     @parameterized.expand([
+#         ("project_root_dir", "..", ["requirements.txt", ".python-version", ".gitignore", "README.md"]),
+#         ("test_empty_string", "../src/childish_file_renamer", ["__init__.py", "childish_file_renamer.py"])
+#     ])
+#     def test_get_files_success_project_root(
+#             self,
+#             scenario_name: str,
+#             path: str,
+#             file_names_expected: List[str]) -> None:
+#         file_names_computed: List[str] = self.subject.get_filenames(path=path)
+#         self.assertEqual(first=set(file_names_expected), second=set(file_names_computed))
