@@ -49,7 +49,6 @@ class TestSimpleRenameApplier(TestCase):
         ("test_case_1", "non_existent_directory", "file1.txt", "file1.txt"),
         ("test_case_2", "non_existent_directory", "file2.png", "file2.png"),
     ])
-
     # Test Method:
     def test_rename_file_source_and_destination_filenames_are_same(
             self,
