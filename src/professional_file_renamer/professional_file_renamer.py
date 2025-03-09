@@ -1,3 +1,4 @@
+import logging
 import os
 
 from src.professional_file_renamer.filenames_retriever.filenames_retriever import FilenamesRetriever
@@ -41,7 +42,17 @@ class ProfessionalFileRenamer:
         filtered_filenames: List[str] = self._filenames_filterer.filter_filenames(filenames=filenames, extension=from_extension)
         for filename in filtered_filenames:
             new_filename: str = self._filename_creator.get_new_filename(source_filename=filename, suffix=to_extension) # Create new filename
-            self._rename_applier.rename(path=path, source_filename=filename, destination_filename=new_filename)  # Perform rename
+            self._rename(path=path, source_filename=filename, destination_filename=new_filename) # rename file
+
+
+    def _rename(self, path: str, source_filename: str, destination_filename: str) -> None:
+        try:
+            self._rename_applier.rename(
+                path=path, source_filename=source_filename, destination_filename=destination_filename)
+        except FileNotFoundError as e:
+           logging.warning(f"File not found: {e}")
+        except FileExistsError as e:
+           logging.warning(f"File already exists: {e}")
 
 if __name__ == '__main__':
     print(f"Current directory is {os.path.abspath(os.curdir)}")
