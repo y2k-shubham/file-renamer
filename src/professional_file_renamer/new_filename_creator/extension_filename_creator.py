@@ -19,3 +19,4 @@ class ExtensionFilenameCreator(FilenameCreator):
         filename_without_extension: str = ".".join(filename_tokens_without_extension)
         new_filename: str = f"{filename_without_extension}.{suffix}"
         return new_filename
+
