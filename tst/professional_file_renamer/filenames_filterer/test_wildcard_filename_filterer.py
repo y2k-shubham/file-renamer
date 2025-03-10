@@ -1,8 +1,7 @@
 import unittest
-import os
+from typing import List
+
 from parameterized import parameterized
-from typing import Any, List
-import fnmatch
 
 from professional_file_renamer.filenames_filterer.wildcard_filename_filterer import WildcardFilenameFilterer
 
