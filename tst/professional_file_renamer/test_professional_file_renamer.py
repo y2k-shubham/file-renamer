@@ -26,8 +26,8 @@ class TestProfessionalRenameApplier(unittest.TestCase):
 
     @override
     def setUp(self) -> None:
-        self._create_subject()
-        self._create_test_files()
+        self._create_subject()   # Creates the object being tested
+        self._create_test_files()  # Creates any files needed for testing
 
     def _create_subject(self) -> None:
         filenames_retriever: FilenamesRetriever = SimpleFilenamesRetriever()
