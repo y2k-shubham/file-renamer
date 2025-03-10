@@ -12,12 +12,17 @@ class TestRegexFilenameFilterer(unittest.TestCase):
 
     # Test Cases Definition:
     @parameterized.expand([
-        ("filter_txt_files",["test.txt", "sample.doc", "data.txt"],r".*\.txt$",["test.txt", "data.txt"]),
         ("filter_empty_list", [], r".*\.txt$",[]),
         ("filter_single_file", ["file1.txt"], r".*\.txt$", ["file1.txt"]),
-        ("filter_multiple_files", ["file1.txt", "file2.txt", "file3.doc"], r".*\.txt$", ["file1.txt", "file2.txt"])
+        ("filter_multiple_files", ["file1.txt", "file2.txt", "file3.doc"], r".*\.txt$", ["file1.txt", "file2.txt"]),
+        ("filter_multiple_files", ["file1.txt", "goojy.java", "file2.txt", "file3.doc", "poncho.py"], r"file", ["file1.txt", "file2.txt", "file3.doc"]),
+        # following test-case will only word with re.search(..) and NOT with re.match(..)
+        # ("filter_multiple_files", ["file1.txt", "goojy.java", "file2.txt", "file3.doc", "poncho.py", "ile.poncho"], r"ile",
+        #  ["file1.txt", "file2.txt", "file3.doc", "ile.poncho"]),
+        # to make it work with re.match(..) we must add .* in the beginning of pattern
+        ("filter_multiple_files", ["file1.txt", "goojy.java", "file2.txt", "file3.doc", "poncho.py", "ile.poncho"], r".*ile",
+         ["file1.txt", "file2.txt", "file3.doc", "ile.poncho"])
     ])
-
     # Test method:
     def test_filter_filenames(
             self,
@@ -26,8 +31,5 @@ class TestRegexFilenameFilterer(unittest.TestCase):
             extension: str,
             expected: List[str]
             ) -> None:
-
         result = self.filterer.filter_filenames(filenames, extension)
-        self.assertEqual(result, expected)
-
-
+        self.assertEqual(expected, result)
